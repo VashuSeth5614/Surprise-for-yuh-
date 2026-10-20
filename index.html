@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Surprise For You 🎁</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at top, #3b245c, transparent 45%),
+        linear-gradient(135deg, #120b1d, #24102e);
+    color: white;
+}
+
+/* ---------- INTRO ---------- */
+
+.intro {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+    transition: 1s;
+}
+
+.card {
+    max-width: 500px;
+    width: 100%;
+}
+
+.card .heart {
+    font-size: 60px;
+    animation: heartbeat 1.2s infinite;
+}
+
+.card h1 {
+    margin-top: 20px;
+    font-size: clamp(32px, 8vw, 55px);
+}
+
+.card p {
+    margin-top: 15px;
+    color: #d9cce5;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.openBtn {
+    margin-top: 35px;
+    padding: 15px 32px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg,#ff4f81,#ff7aa2);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(255,79,129,.35);
+    transition: .3s;
+}
+
+.openBtn:hover {
+    transform: scale(1.08);
+}
+
+/* ---------- GIFT ---------- */
+
+.giftScreen {
+    display: none;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.giftScreen h2 {
+    margin-bottom: 60px;
+    font-size: 27px;
+}
+
+.gift {
+    width: 190px;
+    height: 160px;
+    position: relative;
+    cursor: pointer;
+    animation: floating 2s infinite ease-in-out;
+}
+
+.box {
+    position: absolute;
+    bottom: 0;
+    width: 190px;
+    height: 120px;
+    background: #ff3f78;
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.4);
+}
+
+.box::after {
+    content: "";
+    position: absolute;
+    width: 38px;
+    height: 120px;
+    left: 76px;
+    background: #ffd43b;
+}
+
+.lid {
+    position: absolute;
+    width: 210px;
+    height: 43px;
+    left: -10px;
+    top: 15px;
+    background: #ff2465;
+    border-radius: 8px;
+    z-index: 3;
+    transition: 1s;
+}
+
+.lid::after {
+    content: "";
+    position: absolute;
+    width: 38px;
+    height: 43px;
+    left: 86px;
+    background: #ffd43b;
+}
+
+.ribbon {
+    position: absolute;
+    width: 38px;
+    height: 160px;
+    left: 76px;
+    background: #ffd43b;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.bow {
+    position: absolute;
+    z-index: 5;
+    left: 72px;
+    top: -10px;
+}
+
+.bow span {
+    display: inline-block;
+    width: 48px;
+    height: 32px;
+    background: #ffd43b;
+    border-radius: 50%;
+}
+
+.bow span:first-child {
+    transform: rotate(30deg);
+}
+
+.bow span:last-child {
+    transform: rotate(-30deg);
+}
+
+.gift.open .lid {
+    transform: translateY(-100px) rotate(-8deg);
+}
+
+/* ---------- PRANK ---------- */
+
+.prankScreen {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    background: #050505;
+    z-index: 100;
+}
+
+.prankScreen.active {
+    display: flex;
+    animation: screenFlash .5s;
+}
+
+.warning {
+    font-size: 20px;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+.prankText {
+    font-size: clamp(38px, 10vw, 90px);
+    font-weight: 1000;
+    line-height: 1.05;
+    color: #ffd43b;
+    text-transform: uppercase;
+    animation: glitch .35s infinite;
+    text-shadow:
+        4px 0 #ff1744,
+        -4px 0 #00e5ff;
+}
+
+.sub {
+    margin-top: 25px;
+    font-size: 25px;
+}
+
+/* ---------- ANIMATIONS ---------- */
+
+@keyframes floating {
+    0%,100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes heartbeat {
+    0%,100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+@keyframes screenFlash {
+    0% {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(.98);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(-4px,3px);
+    }
+    40% {
+        transform: translate(4px,-3px);
+    }
+    60% {
+        transform: translate(-3px,-2px);
+    }
+    80% {
+        transform: translate(3px,2px);
+    }
+    100% {
+        transform: translate(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<section class="intro" id="intro">
+
+    <div class="card">
+
+        <div class="heart">💝</div>
+
+        <h1>Happy Birthday In Advance! 🎂</h1>
+
+        <p>
+            I know your birthday isn't here yet...
+            <br>
+            but I couldn't wait to give you your surprise. 🥹
+        </p>
+
+        <button class="openBtn" onclick="showGift()">
+            🎁 Open Your Surprise
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- GIFT -->
+<section class="giftScreen" id="giftScreen">
+
+    <h2>
+        Your special gift is waiting... 👀
+    </h2>
+
+    <div class="gift" id="gift" onclick="openGift()">
+
+        <div class="bow">
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="lid"></div>
+
+        <div class="ribbon"></div>
+
+        <div class="box"></div>
+
+    </div>
+
+    <p style="margin-top:35px;color:#aaa;">
+        Tap the gift 🎁
+    </p>
+
+</section>
+
+
+<!-- PRANK -->
+<section class="prankScreen" id="prank">
+
+    <div class="warning">
+        🎉 SURPRISE UNLOCKED 🎉
+    </div>
+
+    <div class="prankText">
+        BARTAN DHO LE<br>
+        4 FOOTIYA 😭😂
+    </div>
+
+    <div class="sub">
+        🧽 🍽️ 🫧
+    </div>
+
+</section>
+
+
+<script>
+
+function showGift() {
+
+    document.getElementById("intro").style.display = "none";
+
+    document.getElementById("giftScreen").style.display = "flex";
+}
+
+
+function openGift() {
+
+    const gift = document.getElementById("gift");
+
+    gift.classList.add("open");
+
+    // Small delay for the gift-opening animation
+    setTimeout(() => {
+
+        document.getElementById("prank").classList.add("active");
+
+        // Screen vibration effect
+        if (navigator.vibrate) {
+            navigator.vibrate([150,80,150,80,300]);
+        }
+
+    }, 900);
+}
+
+</script>
+
+</body>
+</html>
